@@ -24,244 +24,190 @@
             font-family: 'DM Mono', monospace;
             height: 100vh;
             overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr;
-        }
-
-        /* LEFT COLUMN */
-        .left {
-            border-right: 1px solid #10b981;
-            padding: 3rem 3rem 3rem 3.5rem;
+            position: relative;
             display: flex;
             flex-direction: column;
+        }
+
+        /* Top bar */
+        .topbar {
+            display: flex;
             justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .left::after {
-            content: '';
-            position: absolute;
-            bottom: -120px;
-            left: -80px;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, transparent 65%);
-            pointer-events: none;
-        }
-
-        .top-label {
-            font-size: 10px;
-            letter-spacing: 0.35em;
-            color: #10b981;
-            text-transform: uppercase;
+            align-items: center;
+            padding: 2rem 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             opacity: 0;
-            animation: in-left 0.6s ease forwards 0.1s;
+            animation: fade-in 0.5s ease forwards 0.1s;
         }
 
-        .big-title {
+        .topbar-left {
             font-family: 'Anton', sans-serif;
-            font-size: clamp(90px, 13vw, 185px);
-            line-height: 0.88;
-            letter-spacing: -0.01em;
-            text-transform: uppercase;
-            opacity: 0;
-            animation: in-left 0.7s ease forwards 0.3s;
+            font-size: 18px;
+            letter-spacing: 0.05em;
         }
 
-        .big-title .em {
+        .topbar-left span {
             color: #10b981;
-            display: block;
         }
 
-        .big-title .breve {
-            display: block;
-            -webkit-text-stroke: 2px #fff;
-            color: transparent;
-        }
-
-        .bottom-left {
-            opacity: 0;
-            animation: in-left 0.6s ease forwards 0.7s;
-        }
-
-        .bottom-left p {
-            font-size: 10px;
-            letter-spacing: 0.25em;
-            color: rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-            line-height: 2.2;
-        }
-
-        .bottom-left p strong {
-            color: #fff;
-            font-weight: 400;
-        }
-
-        /* RIGHT COLUMN */
-        .right {
-            padding: 3rem 3.5rem 3rem 3rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
-
-        .top-right {
-            display: flex;
-            justify-content: flex-end;
-            opacity: 0;
-            animation: in-right 0.6s ease forwards 0.2s;
-        }
-
-        .top-right span {
+        .topbar-right {
             font-size: 10px;
             letter-spacing: 0.3em;
             color: rgba(255, 255, 255, 0.2);
             text-transform: uppercase;
         }
 
-        .mid-right {
-            opacity: 0;
-            animation: in-right 0.8s ease forwards 0.5s;
-        }
-
-        .plarte-sub {
-            font-family: 'Libre Baskerville', serif;
-            font-style: italic;
-            font-size: clamp(52px, 8vw, 110px);
-            color: rgba(255, 255, 255, 0.08);
-            line-height: 1;
-            letter-spacing: 0.02em;
-            margin-bottom: 2.5rem;
-        }
-
-        .divider {
-            width: 100%;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.08);
-            margin-bottom: 2.5rem;
+        /* Center hero */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            text-align: center;
         }
 
-        .divider::before {
+        /* Vertical lines flanking */
+        .hero::before,
+        .hero::after {
             content: '';
             position: absolute;
-            left: 0;
             top: 0;
+            bottom: 0;
+            width: 1px;
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .hero::before {
+            left: 25%;
+        }
+
+        .hero::after {
+            right: 25%;
+        }
+
+        .em-label {
+            font-size: 10px;
+            letter-spacing: 0.45em;
+            color: #10b981;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fade-up 0.6s ease forwards 0.4s;
+        }
+
+        .big-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(100px, 18vw, 240px);
+            line-height: 0.85;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fade-up 0.7s ease forwards 0.55s;
+        }
+
+        .big-title .em {
+            display: block;
+            color: #10b981;
+        }
+
+        .big-title .breve {
+            display: block;
+            -webkit-text-stroke: 2.5px #fff;
+            color: transparent;
+        }
+
+        .sub-row {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fade-up 0.6s ease forwards 0.75s;
+        }
+
+        .sub-line {
+            width: 40px;
             height: 1px;
-            width: 0;
             background: #10b981;
-            animation: line-grow 1s ease forwards 1s;
         }
 
-        @keyframes line-grow {
-            to {
-                width: 100%;
-            }
-        }
-
-        .desc {
-            font-size: 11px;
-            letter-spacing: 0.15em;
+        .sub-text {
+            font-size: 10px;
+            letter-spacing: 0.3em;
             color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            line-height: 2.2;
-            max-width: 300px;
         }
 
-        .desc em {
+        .sub-text em {
             color: #10b981;
             font-style: normal;
         }
 
-        .bottom-right {
+        /* Bottom bar */
+        .bottombar {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: center;
+            padding: 1.8rem 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             opacity: 0;
-            animation: in-right 0.6s ease forwards 0.8s;
+            animation: fade-in 0.5s ease forwards 1s;
         }
 
-        .plarte-logo {
-            font-family: 'Anton', sans-serif;
-            font-size: 22px;
-            letter-spacing: 0.05em;
-            color: #fff;
-        }
-
-        .plarte-logo span {
-            color: #10b981;
-        }
-
-        .coords {
-            font-size: 9px;
+        .bottombar-left {
+            font-size: 10px;
             letter-spacing: 0.25em;
             color: rgba(255, 255, 255, 0.18);
-            text-align: right;
-            line-height: 2;
-        }
-
-        .vert-num {
-            position: absolute;
-            top: 50%;
-            right: -1px;
-            transform: translateY(-50%) rotate(90deg);
-            font-size: 9px;
-            letter-spacing: 0.4em;
-            color: rgba(16, 185, 129, 0.4);
             text-transform: uppercase;
-            white-space: nowrap;
-            pointer-events: none;
+            line-height: 1.9;
         }
 
-        @keyframes in-left {
+        .bottombar-right {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: clamp(28px, 4vw, 48px);
+            color: rgba(255, 255, 255, 0.06);
+            letter-spacing: 0.02em;
+        }
+
+        /* Animations */
+        @keyframes fade-up {
             from {
                 opacity: 0;
-                transform: translateX(-30px);
+                transform: translateY(28px);
             }
 
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
         }
 
-        @keyframes in-right {
+        @keyframes fade-in {
             from {
                 opacity: 0;
-                transform: translateX(30px);
             }
 
             to {
                 opacity: 1;
-                transform: translateX(0);
             }
         }
 
-        @media (max-width: 640px) {
-            body {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto;
-                overflow-y: auto;
-                height: auto;
-                min-height: 100vh;
+        @media (max-width: 600px) {
+
+            .topbar,
+            .bottombar {
+                padding: 1.5rem;
             }
 
-            .left {
-                border-right: none;
-                border-bottom: 1px solid #10b981;
-                padding: 2.5rem 2rem;
-                gap: 2.5rem;
+            .hero::before,
+            .hero::after {
+                display: none;
             }
 
-            .right {
-                padding: 2.5rem 2rem;
-                gap: 2.5rem;
-            }
-
-            .vert-num {
+            .bottombar-right {
                 display: none;
             }
         }
@@ -270,44 +216,36 @@
 
 <body>
 
-    <div class="left">
-        <div class="top-label">// Em construção</div>
+    <!-- Top bar -->
+    <header class="topbar">
+        <div class="topbar-left">PLARTE<span>.</span>LAB</div>
+        <div class="topbar-right">48.8566° N &nbsp;/&nbsp; 2.3522° E</div>
+    </header>
+
+    <!-- Center -->
+    <main class="hero">
+        <p class="em-label">// Em construção</p>
 
         <div class="big-title">
             <span class="em">Em</span>
             <span class="breve">Breve</span>
         </div>
 
-        <div class="bottom-left">
-            <p>Visão em<br /><strong>realidade digital</strong><br />através da tecnologia.</p>
+        <div class="sub-row">
+            <div class="sub-line"></div>
+            <span class="sub-text">Algo novo está sendo construído. <em>Volte em breve.</em></span>
+            <div class="sub-line"></div>
         </div>
+    </main>
 
-        <div class="vert-num">Plarte.Lab — 2025</div>
-    </div>
-
-    <div class="right">
-        <div class="top-right">
-            <span>48.8566° N &nbsp;/&nbsp; 2.3522° E</span>
+    <!-- Bottom bar -->
+    <footer class="bottombar">
+        <div class="bottombar-left">
+            Visão em <strong style="color:#fff;font-weight:400;">realidade digital</strong><br />
+            BUILD_01 &nbsp;—&nbsp; 2025–2026
         </div>
-
-        <div class="mid-right">
-            <div class="plarte-sub">Lab</div>
-            <div class="divider"></div>
-            <p class="desc">
-                Algo novo está<br />
-                sendo construído.<br />
-                <em>Volte em breve.</em>
-            </p>
-        </div>
-
-        <div class="bottom-right">
-            <div class="plarte-logo">PLARTE<span>.</span>LAB</div>
-            <div class="coords">
-                BUILD_01<br />
-                2025 — 2026
-            </div>
-        </div>
-    </div>
+        <div class="bottombar-right">Lab</div>
+    </footer>
 
 </body>
 
